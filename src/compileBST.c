@@ -40,6 +40,58 @@ void print_strtol_error(FILE* f, const int err, const char *str) {
         break;
     }
 }
+typedef struct ctx_abr {
+    long size;
+    long*  elements;  // Stockage des valeurs lues dans le fichier
+    long** weights;   // Stockage des poids et des racines
+    long*  sum_proba; // Stockage de la somme des poids de l'élément 0 à n
+} ctx_abr;
+
+void free_ctx_abr(ctx_abr *c) {
+    free(c->sum_proba);
+    free(c->elements);
+    free(c->weights[0]);
+    free(c->weights);
+    free(c);
+}
+
+ctx_abr * new_ctx_abr(const long size) {
+    ctx_abr * c = malloc(sizeof(struct ctx_abr));
+    if (c != NULL) {
+        c->size = size;
+        c->elements = malloc(size * sizeof(long));
+        c->sum_proba = malloc(size * sizeof(long));
+        // create a two dimensional array with contiguous data.
+        c->weights = malloc(size * sizeof(long *));
+        c->weights[0] = malloc(size * size * sizeof(long));
+        for (long i = 1; i < size; i++) {
+            // updating pointers to differents rows
+            c->weights[i] = c->weights[i-1] + size; // pointer arithmetics
+        }
+        if (c->elements == NULL || c->sum_proba == NULL
+            || c->weights == NULL || c->weights[0] == NULL ) {
+            perror(__func__);
+            fprintf(stderr, "ERROR can't create a new struct ctx_abr !\n");
+            free_ctx_abr(c);
+            c = NULL;
+        } else {
+            // initialize weights value with -1
+            memset(c->weights[0], -1L, size * size * sizeof(long));
+        }
+    }
+    return c;
+}
+
+void init_ctx(ctx_abr *c) {
+    long i, n = c->size;
+    long sum = 0;
+    for (i = 0; i < n; i++) {
+        sum += c->elements[i];
+        c->sum_proba[i] = sum;
+        // a ABR with only one element have a wheight of it's element proba
+        c->weights[i][i] = c->elements[i];
+    }
+}
 
 void parser(FILE* freqFile, int n, int* tab){
   int c;
