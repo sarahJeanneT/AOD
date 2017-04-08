@@ -190,6 +190,68 @@ long optABR(ctx_abr *c, long n, long m){
     return poidsMin;
 }
 
+long static get_root(ctx_abr *c, long n, long m) {
+    if (n > m) {
+        return -1;
+    } else if (n == m) {
+        return n;
+    } else {
+        return c->weights[m][n];
+    }
+}
+
+void print_out_abr_rec(ctx_abr *c, FILE *out, long n, long m) {
+    long r;
+    if (n > m) {
+        return;
+    }
+    r = c->weights[m][n];
+    if (n == m) {
+        // feuille
+        fprintf(out, "{-1, -1}");
+        if ((n+1) != c->size) {
+            fprintf(out, ",\n");
+        }
+    } else if ((n + 1) == m) { // m - n == 1
+        if (r == n) {
+            fprintf(out, "{-1, %li},\n", get_root(c, r+1, m));
+            print_out_abr_rec(c, out, r+1, m);
+        } else {
+            print_out_abr_rec(c, out, n, r-1);
+            fprintf(out, "{%li, -1}", get_root(c, n, r-1));
+            if (m != c->size) {
+                fprintf(out, ",\n");
+            }
+        }
+    } else {
+        // parcourt infixée
+        print_out_abr_rec(c, out, n, r-1);
+        fprintf(out, "{%li, %li}", get_root(c, n, r-1), get_root(c, r+1, m));
+        if ((n+1) != c->size) {
+            fprintf(out, ",\n");
+        }
+        print_out_abr_rec(c, out, r+1, m);
+    }
+}
+
+void print_out_abr(ctx_abr *c, FILE *out) {
+    long i, size = c->size;
+    fprintf(out, "static int BSTdepth = %li;\n", c->weights[0][size - 1]);
+    fprintf(out, "static int BSTroot = %li;\n", c->weights[size - 1][0]);
+    fprintf(out, "static int BSTtree[%li][2] = {\n", size);
+    print_out_abr_rec(c, out, 0, size - 1);
+    fprintf(out, "};\n");
+
+    fprintf(out, "static int p[%li] = {\n", size);
+    for (i = 0; i < size; i++) {
+        fprintf(out, "%li", c->elements[i]);
+        if (i+1 != size) {
+            fprintf(out, ",\n");
+        }
+    }
+    fprintf(out, "};\n");
+}
+
 /**
  * Main function
  * \brief Main function
@@ -246,6 +308,8 @@ int main (int argc, char *argv[]) {
   optABR(ctx, 0, ctx->size-1);
 
   IF_DEBUG(print_ctx(ctx););
+
+  print_out_abr(ctx, stdout);
 
   free_ctx_abr(ctx);
 
