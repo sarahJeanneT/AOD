@@ -15,7 +15,14 @@
 #include <assert.h>
 #include <string.h>
 
+// (un)comment this define to toggle debug print
+//#define DEBUG
 
+#ifdef DEBUG
+#define IF_DEBUG(_p_) { _p_ ;}
+#else
+#define IF_DEBUG(_p_) {}
+#endif
 
 void print_usage(FILE* f) {
     fprintf(f, "Usage: compileBST <n> <file>\n");
