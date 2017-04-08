@@ -40,6 +40,7 @@ void print_strtol_error(FILE* f, const int err, const char *str) {
         break;
     }
 }
+
 typedef struct ctx_abr {
     long size;
     long*  elements;  // Stockage des valeurs lues dans le fichier
@@ -93,50 +94,100 @@ void init_ctx(ctx_abr *c) {
     }
 }
 
-void parser(FILE* freqFile, int n, int* tab){
-  int c;
-  int poids = 0;
-  int i = 0;
-
-  while(i < n)
-    {
-      //if( feof(freqFile) ) {break ;}
-
-      poids = 0;
-       c = fgetc(freqFile);
-       c = fgetc(freqFile);
-       while (c != 32){
-         poids = poids*10 + (c - 48);
-         c = fgetc(freqFile);
-       }
-       printf(" %i ", poids);
-       tab[i] = poids;
-       i++;
+void print_ctx(ctx_abr *c) {
+    long i, j, n = c->size;
+    puts("elements :");
+    for (i = 0; i < n; i++) {
+        printf("%li ",c->elements[i]);
     }
+    puts("\nsum_proba :");
+    for (i = 0; i < n; i++) {
+        printf("%li ",c->sum_proba[i]);
+    }
+    puts("\nweights :");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%li ",c->weights[i][j]);
+        }
+        puts("");
+    }
+    puts("");
 }
 
-void optABR(int* valeurs, int n, int m, int** poidsABR, int* poids, int N){
-  int poidsMin;
-  int racineMin;
-  int i = n;
-  while (i < m){
-    if(poidsABR[n][i-1] == -1){
-      optABR(valeurs,n,i-1,poidsABR,poids,N);
+int parser(ctx_abr *c, FILE* freqFile){
+    long i = 0, n = c->size;
+    long poids = 0;
+    char word[256]; // will fail to read words of more than 256 chars !
+    while(i < n && !feof(freqFile)) {
+        fscanf(freqFile, "%s ", word);
+        poids = strtol(word, NULL, 10);
+        if (errno != EXIT_SUCCESS) {
+            print_strtol_error(stderr, errno, word);
+            perror(__func__);
+            exit(EXIT_FAILURE);
+        }
+        c->elements[i] = poids;
+        i++;
     }
-    if(poidsABR[i+1][m] == -1){
-      optABR(valeurs,i+1,m,poidsABR,poids,N);
-    }
-    if (poidsMin > poids[m] - poids[n] + poidsABR[n][i-1] + poidsABR[i+1][m] || i == n){
-      poidsMin = poids[m] - poids[n] + poidsABR[n][i-1] + poidsABR[i+1][m];
-      racineMin = i;
-    }
-  }
-  poidsABR[n][m] = poidsMin;
-  poidsABR[N-n][N-m] = racineMin;
-
+    return (i == n)?0:-1;
 }
 
+long optABR(ctx_abr *c, long n, long m){
+    long poids, abr_left, abr_right, poidsMin = LONG_MAX;
+    long racineMin, sum_proba;
+    long r = n;
+    if (n > m) {
+        fprintf(stderr, "ERROR n > m : %li - %li !\n", n, m);
+        return 0;
+    }
+    IF_DEBUG(printf("optABR %li - %li\n",n,m);)
+    if (n == m) {
+        return c->elements[n];
+    }
+    sum_proba = c->sum_proba[m] - c->sum_proba[n];
 
+    // special case r == n => no abr_left
+    abr_right = c->weights[r+1][m];
+    if (abr_right == -1){
+        abr_right = optABR(c, r+1, m);
+    } else IF_DEBUG(printf("allRdy %li - %li   =   %li\n",r+1,m,abr_right));
+    poids = sum_proba + abr_right;
+    if (poids < poidsMin){
+        poidsMin = poids;
+        racineMin = r;
+    }
+    // r in ]n, m[
+    for (r++; r < m; r++) {
+        abr_left = c->weights[n][r-1];
+        abr_right = c->weights[r+1][m];
+        if (abr_left == -1) {
+            abr_left = optABR(c, n, r-1);
+        } else IF_DEBUG(printf("allRdy %li - %li   =   %li\n",n,r-1,abr_left);)
+        if (abr_right == -1){
+            abr_right = optABR(c, r+1, m);
+        } else IF_DEBUG(printf("allRdy %li - %li   =   %li\n",r+1,m,abr_right);)
+        poids = sum_proba + abr_left + abr_right;
+        if (poids < poidsMin){
+            poidsMin = poids;
+            racineMin = r;
+        }
+    }
+    // special case r == m => no abr_right
+    abr_left = c->weights[n][r-1];
+    if (abr_left == -1){
+        abr_left = optABR(c, n, r-1);
+    } else IF_DEBUG(printf("allRdy %li - %li   =   %li\n",n,r-1,abr_left);)
+    poids = sum_proba + abr_left;
+    if (poids < poidsMin){
+        poidsMin = poids;
+        racineMin = r;
+    }
+
+    c->weights[n][m] = poidsMin;
+    c->weights[m][n] = racineMin;
+
+    return poidsMin;
+}
 
 /**
  * Main function
@@ -180,29 +231,22 @@ int main (int argc, char *argv[]) {
       exit(EXIT_FAILURE);
   }
 
-  int valeurs[n]; //Stockage des valeurs lues dans le fichier
-  int poidsABR[n][n]; //Stockage des poids et des racines
-  int poids[n]; //Stockage de la somme des poids de l'élément 0 à n
+  ctx_abr * ctx = new_ctx_abr(n);
 
-  //initialisation des tableaux
-  parser(freqFile, n, valeurs);
-  int i, j;
-  poids[0] = valeurs[0];
-  for(i = 1; i < n; i++){
-      poids[i] = valeurs[i] + poids[i-1];
-  }
-  for (i = 0; i < n; i++){
-    for (j = 0; j < n; i++){
-      poidsABR[i][j] = -1;
-    }
-  }
-
-  optABR(valeurs, 0, n, poidsABR, poids, n);
-
-
-  // TO BE COMPLETED
+  // lecture du fichier
+  parser(ctx, freqFile);
   fclose(freqFile);
 
+  // initialisation de la somme des poids
+  init_ctx(ctx);
+
+  IF_DEBUG(print_ctx(ctx);)
+
+  optABR(ctx, 0, ctx->size-1);
+
+  IF_DEBUG(print_ctx(ctx);)
+
+  free_ctx_abr(ctx);
 
   return 0;
 }
