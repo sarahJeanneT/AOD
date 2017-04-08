@@ -61,7 +61,7 @@ ctx_abr * new_ctx_abr(const long size) {
     if (c != NULL) {
         c->size = size;
         c->elements = malloc(size * sizeof(long));
-        c->sum_proba = malloc(size * sizeof(long));
+        c->sum_proba = malloc((1 + size) * sizeof(long));
         // create a two dimensional array with contiguous data.
         c->weights = malloc(size * sizeof(long *));
         c->weights[0] = malloc(size * size * sizeof(long));
@@ -86,9 +86,10 @@ ctx_abr * new_ctx_abr(const long size) {
 void init_ctx(ctx_abr *c) {
     long i, n = c->size;
     long sum = 0;
+    c->sum_proba[0]=0;
     for (i = 0; i < n; i++) {
         sum += c->elements[i];
-        c->sum_proba[i] = sum;
+        c->sum_proba[1+i] = sum;
         // a ABR with only one element have a wheight of it's element proba
         c->weights[i][i] = c->elements[i];
     }
@@ -144,7 +145,7 @@ long optABR(ctx_abr *c, long n, long m){
     if (n == m) {
         return c->elements[n];
     }
-    sum_proba = c->sum_proba[m] - c->sum_proba[n];
+    sum_proba = c->sum_proba[m+1] - c->sum_proba[n];
 
     // special case r == n => no abr_left
     abr_right = c->weights[r+1][m];
@@ -162,10 +163,10 @@ long optABR(ctx_abr *c, long n, long m){
         abr_right = c->weights[r+1][m];
         if (abr_left == -1) {
             abr_left = optABR(c, n, r-1);
-        } else IF_DEBUG(printf("allRdy %li - %li   =   %li\n",n,r-1,abr_left);)
+        } else IF_DEBUG(printf("allRdy %li - %li   =   %li\n",n,r-1,abr_left););
         if (abr_right == -1){
             abr_right = optABR(c, r+1, m);
-        } else IF_DEBUG(printf("allRdy %li - %li   =   %li\n",r+1,m,abr_right);)
+        } else IF_DEBUG(printf("allRdy %li - %li   =   %li\n",r+1,m,abr_right););
         poids = sum_proba + abr_left + abr_right;
         if (poids < poidsMin){
             poidsMin = poids;
@@ -240,11 +241,11 @@ int main (int argc, char *argv[]) {
   // initialisation de la somme des poids
   init_ctx(ctx);
 
-  IF_DEBUG(print_ctx(ctx);)
+  IF_DEBUG(print_ctx(ctx););
 
   optABR(ctx, 0, ctx->size-1);
 
-  IF_DEBUG(print_ctx(ctx);)
+  IF_DEBUG(print_ctx(ctx););
 
   free_ctx_abr(ctx);
 
