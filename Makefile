@@ -14,8 +14,15 @@ CSOURCE=$(wildcard $(SRCDIR)/compileBST.c)
 PDF=$(LATEXSOURCE:.tex=.pdf)
 
 
-all: binary report doc 
+all: directories binary report doc
 
+directories: $(BINDIR) $(DOCDIR)
+
+$(BINDIR):
+	mkdir -p $(BINDIR)
+
+$(DOCDIR):
+	mkdir -p $(DOCDIR)
 
 $(BINDIR)/compileBST: $(CSOURCE)
 	$(CC) $(CFLAGS)  $^ -o $@
