@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -68,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,6 +85,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">compileBST.c File Reference</div>  </div>
@@ -101,14 +105,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <p><a href="compileBST_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structctx__abr.html">ctx_abr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a77a2b2d47b56ed7944c4270ba35cf297"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a77a2b2d47b56ed7944c4270ba35cf297">IF_DEBUG</a>(_p_)&#160;&#160;&#160;{}</td></tr>
+<tr class="separator:a77a2b2d47b56ed7944c4270ba35cf297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a2ab267e7013a830131acf8de092ca0ac"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structctx__abr.html">ctx_abr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a2ab267e7013a830131acf8de092ca0ac">ctx_abr</a></td></tr>
+<tr class="separator:a2ab267e7013a830131acf8de092ca0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a29c8c53249ed88a5536631a96a91ace4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a29c8c53249ed88a5536631a96a91ace4">parser</a> (FILE *freqFile, int n, int *tab)</td></tr>
-<tr class="memdesc:a29c8c53249ed88a5536631a96a91ace4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function.  <a href="#a29c8c53249ed88a5536631a96a91ace4">More...</a><br/></td></tr>
-<tr class="separator:a29c8c53249ed88a5536631a96a91ace4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7a516599c355895b995b133ad0b97c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#ad7a516599c355895b995b133ad0b97c4">optABR</a> (int *valeurs, int n, int m, int **poidsABR, int *poids, int N)</td></tr>
-<tr class="separator:ad7a516599c355895b995b133ad0b97c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5933e083ef23367fa5b23913479d855a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a5933e083ef23367fa5b23913479d855a">print_usage</a> (FILE *f)</td></tr>
+<tr class="separator:a5933e083ef23367fa5b23913479d855a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0727f75ce619a494aef2cae231fd27bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a0727f75ce619a494aef2cae231fd27bd">print_strtol_error</a> (FILE *f, const int err, const char *str)</td></tr>
+<tr class="separator:a0727f75ce619a494aef2cae231fd27bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7a6939a0d748a00f47dc95ec1e50b20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#aa7a6939a0d748a00f47dc95ec1e50b20">free_ctx_abr</a> (<a class="el" href="structctx__abr.html">ctx_abr</a> *c)</td></tr>
+<tr class="separator:aa7a6939a0d748a00f47dc95ec1e50b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf2da804197c3b6c5838a9c0facce8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structctx__abr.html">ctx_abr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#aaaf2da804197c3b6c5838a9c0facce8d">new_ctx_abr</a> (const long size)</td></tr>
+<tr class="separator:aaaf2da804197c3b6c5838a9c0facce8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fafe5d8c4af552a426d57a68e043a5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a9fafe5d8c4af552a426d57a68e043a5b">init_ctx</a> (<a class="el" href="structctx__abr.html">ctx_abr</a> *c)</td></tr>
+<tr class="separator:a9fafe5d8c4af552a426d57a68e043a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35c36506b5f3796e20203ddedf5c4f0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a35c36506b5f3796e20203ddedf5c4f0e">print_ctx</a> (<a class="el" href="structctx__abr.html">ctx_abr</a> *c)</td></tr>
+<tr class="separator:a35c36506b5f3796e20203ddedf5c4f0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb007b4260e5f81f748cb5aad372d40f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#adb007b4260e5f81f748cb5aad372d40f">parser</a> (<a class="el" href="structctx__abr.html">ctx_abr</a> *c, FILE *freqFile)</td></tr>
+<tr class="separator:adb007b4260e5f81f748cb5aad372d40f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1310ea685f70d870aa93bdd0ff4d7f09"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a1310ea685f70d870aa93bdd0ff4d7f09">optABR</a> (<a class="el" href="structctx__abr.html">ctx_abr</a> *c, long n, long m)</td></tr>
+<tr class="separator:a1310ea685f70d870aa93bdd0ff4d7f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39b2fb0771f68d70fa70edb48980bb12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a39b2fb0771f68d70fa70edb48980bb12">print_out_abr_rec</a> (<a class="el" href="structctx__abr.html">ctx_abr</a> *c, FILE *out, long n, long m)</td></tr>
+<tr class="separator:a39b2fb0771f68d70fa70edb48980bb12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02004f73435a855acff620f8554eca13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a02004f73435a855acff620f8554eca13">print_out_abr</a> (<a class="el" href="structctx__abr.html">ctx_abr</a> *c, FILE *out)</td></tr>
+<tr class="separator:a02004f73435a855acff620f8554eca13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compileBST_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function.  <a href="#a0ddf1224851353fc92bfbff6f499fa97">More...</a><br/></td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -122,7 +157,75 @@ Jean-Louis Roch </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU Public License. </dd></dl>
 
 <p>Definition in file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="a77a2b2d47b56ed7944c4270ba35cf297"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IF_DEBUG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_p_</td><td>)</td>
+          <td>&#160;&#160;&#160;{}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00024">24</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a class="anchor" id="a2ab267e7013a830131acf8de092ca0ac"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structctx__abr.html">ctx_abr</a>  <a class="el" href="structctx__abr.html">ctx_abr</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aa7a6939a0d748a00f47dc95ec1e50b20"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_ctx_abr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structctx__abr.html">ctx_abr</a> *&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00051">51</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9fafe5d8c4af552a426d57a68e043a5b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_ctx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structctx__abr.html">ctx_abr</a> *&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00087">87</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a0ddf1224851353fc92bfbff6f499fa97"></a>
 <div class="memitem">
 <div class="memproto">
@@ -147,92 +250,6 @@ Jean-Louis Roch </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00073">73</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad7a516599c355895b995b133ad0b97c4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void optABR </td>
-          <td>(</td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>valeurs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>m</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int **&#160;</td>
-          <td class="paramname"><em>poidsABR</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>poids</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>N</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00051">51</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a29c8c53249ed88a5536631a96a91ace4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void parser </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>freqFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>tab</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
 <p>Main function. </p>
 <p>Main function </p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -245,14 +262,232 @@ Jean-Louis Roch </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Must be called with a positive long integer, n, and a filename, freqFile, as commandline parameters and in the given order. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>{ 0 if succeeds and prints C code implementing an optimal ABR on stdout; exit code otherwise} </dd></dl>
 
-<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00029">29</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00264">264</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaaf2da804197c3b6c5838a9c0facce8d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structctx__abr.html">ctx_abr</a>* new_ctx_abr </td>
+          <td>(</td>
+          <td class="paramtype">const long&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00059">59</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1310ea685f70d870aa93bdd0ff4d7f09"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long optABR </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structctx__abr.html">ctx_abr</a> *&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00137">137</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adb007b4260e5f81f748cb5aad372d40f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parser </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structctx__abr.html">ctx_abr</a> *&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>freqFile</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00119">119</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a35c36506b5f3796e20203ddedf5c4f0e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_ctx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structctx__abr.html">ctx_abr</a> *&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00099">99</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a02004f73435a855acff620f8554eca13"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_out_abr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structctx__abr.html">ctx_abr</a> *&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00238">238</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a39b2fb0771f68d70fa70edb48980bb12"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_out_abr_rec </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structctx__abr.html">ctx_abr</a> *&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00204">204</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0727f75ce619a494aef2cae231fd27bd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_strtol_error </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>err</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00031">31</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5933e083ef23367fa5b23913479d855a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_usage </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="compileBST_8c_source.html#l00027">27</a> of file <a class="el" href="compileBST_8c_source.html">compileBST.c</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 13 2017 10:04:41 for applyPatch by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 13 2017 10:22:51 for applyPatch by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
