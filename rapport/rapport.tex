@@ -18,7 +18,7 @@
 \title{Rapport de TP 4MMAOD : Génération d'ABR optimal}
 \author{
 MASELBAS Jules (groupe 1) 
-\\ TOURANGEAU Sarah-Jeanne$_2$ (groupe 1) 
+\\ TOURANGEAU Sarah-Jeanne (groupe 1) 
 }
 
 \begin{document}
@@ -35,11 +35,9 @@ MASELBAS Jules (groupe 1)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Principe de notre  programme (1 point)}
-{\em Mettre ici une explication brève du principe de votre programme en  précisant la méthode implantée (récursive, itérative) et les
-choix effectués (notamment pour l'ordonnancement des instructions).
-}
+%{\em Mettre ici une explication brève du principe de votre programme en  précisant la méthode implantée (récursive, itérative) et les choix effectués (notamment pour l'ordonnancement des instructions).}
 
-Nous avons choisi la méthode récursive. Un fois que le fichier est lu, voici les étapes de notre algorithme d'ordonnancement : \\
+Nous avons choisi la méthode récursive. Un fois que le fichier est lu, et le vecteur de somme des probabilités calculé, voici les étapes de notre algorithme d'ordonnancement : \\
 1- Si l'arbre n'a pas de feuille, on renvoie le poids de la racine\\
 2- On calcule le poids de l'arbre dans le cas où l'on choisirait la première valeur (n) comme racine.\\
 3- On calcule le poids de l'arbre dans les cas où l'on choisirsait les valeurs de n+1 à m-1 comme racine.\\
@@ -51,51 +49,63 @@ Pour calculer le poids d'un arbre, on additionne le poids de la racine et des de
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Analyse du coût théorique (2 points)}
-{\em Donner ici l'analyse du coût théorique de votre programme en fonction du nombre $n$ d'éléments dans le dictionnaire.
- Pour chaque coût, donner la formule qui le caractérise (en justifiant brièvement pourquoi cette formule correspond à votre programme), 
- puis l'ordre du coût en fonction de $n$ en notation $\Theta$ de préférence, sinon $O$.}
+%{\em Donner ici l'analyse du coût théorique de votre programme en fonction du nombre $n$ d'éléments dans le dictionnaire. Pour chaque coût, donner la formule qui le caractérise (en justifiant brièvement pourquoi cette formule correspond à votre programme), puis l'ordre du coût en fonction de $n$ en notation $\Theta$ de préférence, sinon $O$.}
 
   \subsection{Nombre  d'opérations en pire cas\,: }
     \paragraph{Justification\,: }
-    {\em La justification peut être par exemple de la forme: \\ 
-       "Le programme itératif contient les boucles $k_1=...$, $k_2= ...$ etc correspondant à la somme 
-      $$T(n_1, n_2, c_1, c_2) = \sum_{k_1=...}^{...} ... \sum ... + \sum_{i=...}^{...} ...$$ 
-      somme que nous avons calculée (ou majorée) par la technique de  ... " \\
-      ou  encore\,:  \\
-      "les appels récursifs du programme permettent de modéliser son coût par le système d'équations aux récurrences 
-      $$T(k_1, k_2) = ...  \mbox{~avec~les~conditions~initiales~....~} $$
-      Le coût indiqué est obtenu en résolvant ce système par la méthode de  .... "
-    } 
+    %{\em La justification peut être par exemple de la forme: \\ 
+       %"Le programme itératif contient les boucles $k_1=...$, $k_2= ...$ etc correspondant à la somme 
+      %$$T(n_1, n_2, c_1, c_2) = \sum_{k_1=...}^{...} ... \sum ... + \sum_{i=...}^{...} ...$$ 
+      %somme que nous avons calculée (ou majorée) par la technique de  ... " \\
+      %ou  encore\,:  \\
+      %"les appels récursifs du programme permettent de modéliser son coût par le système d'équations aux récurrences 
+      %$$T(k_1, k_2) = ...  \mbox{~avec~les~conditions~initiales~....~} $$
+      %Le coût indiqué est obtenu en résolvant ce système par la méthode de  .... "
+    %}
+
+	On commence par calculer le vecteur de somme des propabilité. ce qui a un cout de n, puisqu'on boucle sur un vecteur n en faisant une addition à chaque fois.\\	
+	On doit ensuite calculer le poids de n arbres (puisqu'il y a n noeuds). Le poids d'un arbre est un calcul prenant en compte deux valeurs dans le vecteur de somme des probabilités, et deux poids de sous-arbres. Les poids de ces sous-arbres seront calculé une première fois, puis stockés dans la matrice poids par la suite. Sans compter la récursion, on fait donc n fois une adition.\\
+	Pour la récursion, on va calculer le poids et la racine de $\frac{n*n}{2}$ sous-arbres. On a un arbre (l'arbre contenant les noeuds de 1 à n) pour lequel on doit tester n arbres. on a deux arbres (ceux contenant 2 à n et 1 à n-1) pour lequels on doit tester n-1 cas. Ce qui donne donc :
+$$\sum_{k = 1}^{n} k*(n+1-k)$$
+Pour un total de 
+$$ O(2n + \sum_{k = 1}^{n} k*(n+1-k)) = 
+O(2n + (n+1)\sum_{k = 1}^{n} k - \sum_{k = 1}^{n} K^2) $$ $$ = 
+O(2n + \frac{(n+1)^2(n)}{2} - \frac{n(n+1)(2n+1)}{6}) $$ $$ =
+O(\frac{n^3 + 3n^2 + 14n}{6}) = O(n^3)$$ 
+ 
   \subsection{Place mémoire requise\,: }
     \paragraph{Justification\,: }
+On a trois matrices, la matrice des valeurs lues (taille n), la matrice des somme de probabilités (taille n) et la matrice des poids et racines ( $\frac{n*n}{2}$ + $\frac{n*n}{2}$ = n*n). Pour un total de $$ n^2 + 2n$$ cases mémoire.
 
   \subsection{Nombre de défauts de cache sur le modèle CO\,: }
     \paragraph{Justification\,: }
+Le nombre de défaut de cache n'est pas particulièrement optinisé dans ce programme. 
+On peut donc supposer qu'on a un défaut de cache au maximum à chaque fois que l'on va récupérer une valeur dans un tableau. Pour trouver la racine, on a besoin d'aller chercher deux valeurs dans le vecteur de somme des probabilité, et n * 2 valeurs dans la matric de poids (au maximum). Puisqu'on doit calculer tous les sous-arbres, avant de revenir au calcul de la racine n, il est raisonnable de penser que les deux valeurs de vecteur somme des probabilité ne seront plus dans le cache. On a donc n*4 valeurs.
 
+On a donc un arbre de n valeurs qui génère 4*n défaut de cache, 2 arbres de (n-1) valeurs qui génèrent 4*(n-1) défauts de cache chacun, pour un total de :
+$$ O(\sum_{k = 1}^{n} 4*(n+1-k)) = 
+O(4n^2 + 4n - 4\sum_{k = 1}^{n} k)= 
+O(4n^2 + 4n - 4\frac{n(n+1)}{2}) = $$ $$ 
+O(2n^2 + 2n) = O(n^2)$$ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Compte rendu d'expérimentation (2 points)}
   \subsection{Conditions expérimentaless}
-     {\em Décrire les conditions permettant la reproductibilité des mesures: on demande la description
-      de la machine et la méthode utilisée pour mesurer le temps.
-     }
+     %{\em Décrire les conditions permettant la reproductibilité des mesures: on demande la description de la machine et la méthode utilisée pour mesurer le temps. }
 
     \subsubsection{Description synthétique de la machine\,:} 
-      {\em indiquer ici le  processeur et sa fréquence, la mémoire, le système d'exploitation. 
-       Préciser aussi si la machine était monopolisée pour un test, ou notamment si 
-       d'autres processus ou utilisateurs étaient en cours d'exécution. 
-      } 
+      %{\em indiquer ici le  processeur et sa fréquence, la mémoire, le système d'exploitation. Préciser aussi si la machine était monopolisée pour un test, ou notamment si d'autres processus ou utilisateurs étaient en cours d'exécution. }
+	Les tests ont été effectués sur les  machines de l'ensimag. Aucun autres processus n'était en marche.\\
+Processeur  : Intel Core i3 CPU M370 @ 2.40 GHz x 4\\
+Mémoire : 3.6 GiB\\
+Système d'exploition : Linux CentOS
 
     \subsubsection{Méthode utilisée pour les mesures de temps\,: } 
-      {\em préciser ici  comment les mesures de temps ont été effectuées (fonction appelée) et l'unité de temps; en particulier, 
-       préciser comment les 5 exécutions pour chaque test ont été faites (par exemple si le même test est fait 5 fois de suite, ou si les tests sont alternés entre
-       les mesures, ou exécutés en concurrence etc). 
-      }
+      %{\em préciser ici  comment les mesures de temps ont été effectuées (fonction appelée) et l'unité de temps; en particulier, préciser comment les 5 exécutions pour chaque test ont été faites (par exemple si le même test est fait 5 fois de suite, ou si les tests sont alternés entre les mesures, ou exécutés en concurrence etc). }
+	Les 5 exécutions ont été effectuées les unes après les autres. Nous avons commencé par les 5 exécutions de benchmark1, puis de benchmark2, etc.
 
   \subsection{Mesures expérimentales}
-    {\em Compléter le tableau suivant par les temps d'exécution mesurés pour chacun des 6 benchmarks imposés
-              (temps minimum, maximum et moyen sur 5 exécutions)
-    }
+    %{\em Compléter le tableau suivant par les temps d'exécution mesurés pour chacun des 6 benchmarks imposés (temps minimum, maximum et moyen sur 5 exécutions) }
 
     \begin{figure}[h]
       \begin{center}
@@ -104,19 +114,20 @@ Pour calculer le poids d'un arbre, on additionne le poids de la racine et des de
           \hline
             & coût         & temps     & temps   & temps \\
             & du patch     & min       & max     & moyen \\
+	    &		   & (s)       & (s)     & (s)   \\
           \hline
           \hline
-            benchmark1 &      &     &     &     \\
+            benchmark1 &      &  0.003   &  0.009   &   0.0052  \\
           \hline
-            benchmark2 &      &     &     &     \\
+            benchmark2 &      &   0.002  &   0.004  &   0.0034  \\
           \hline
-            benchmark3 &      &     &     &     \\
+            benchmark3 &      &  3.215   &  3.392   &    3.3188 \\
           \hline
-            benchmark4 &      &     &     &     \\
+            benchmark4 &      &  28.220   &  28.538   &   28.3478  \\
           \hline
-            benchmark5 &      &     &     &     \\
+            benchmark5 &      &   111.837  & 116.058    &   114.1602  \\
           \hline
-            benchmark6 &      &     &     &     \\
+            benchmark6 &      &  583.154   &  596.717   &    587.564 \\
           \hline
           \hline
         \end{tabular}
@@ -126,9 +137,12 @@ Pour calculer le poids d'un arbre, on additionne le poids de la racine et des de
     \end{figure}
 
 \subsection{Analyse des résultats expérimentaux}
-{\em Donner  une réponse justifiée  à la question\,: 
-              les  temps mesurés correspondent ils  à votre analyse théorique (nombre d’opérations et défauts de cache) ?
-}
+%{\em Donner  une réponse justifiée  à la question\, : les  temps mesurés correspondent ils  à votre analyse théorique (nombre d’opérations et défauts de cache) ? }
+Les temps correspondent à peu près à notre analyse. On considère que le nombre d'opération est ce qui coutera le plus cher, et qu'il sera significativement plus cher que les autres, étant en $n^3$. Lorsqu'on cherche la courbe en $x^3$ qui s'approche le plus de nos données, on trouve $$f(n) \approx 3*10^{-9}*n^3$$
+Et des valeurs théoriques de
+$$ f(1000) = 3$$ $$ f(2000) = 24 $$$$f(3000) = 81$$$$f(5000) = 375$$
+Ce qui varie à peu près comme nos résultats.
+
 
 \end{document}
 %% Fin mise au format
